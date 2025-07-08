@@ -1,0 +1,17 @@
+{
+  "name": "hemisphere-agent",
+  "version": "0.1.0",
+  "description": "AI-powered desktop agent for Hemisphere",
+  "scripts": {
+    "dev": "tauri dev",
+    "build": "tauri build",
+    "tauri": "tauri"
+  },
+  "keywords": ["tauri", "desktop", "ai", "agent"],
+  "author": "Hemisphere Contributors",
+  "license": "MIT OR Apache-2.0",
+  "type": "module",
+  "devDependencies": {
+    "@tauri-apps/cli": "^1.5.0"
+  }
+}
