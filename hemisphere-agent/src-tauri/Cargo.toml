@@ -21,6 +21,8 @@ anyhow = "1.0"
 thiserror = "2.0"
 
 tauri = { version = "1.5", features = ["shell-open", "system-tray"] }
+webview2-com = "0.19.1"
+windows = "0.39.0"
 
 # MCP client dependencies
 jsonrpc-core = "18.0"
