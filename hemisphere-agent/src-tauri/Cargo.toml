@@ -17,7 +17,7 @@ tracing-subscriber.workspace = true
 anyhow.workspace = true
 thiserror.workspace = true
 
-tauri = { version = "1.5", features = ["shell-open"] }
+tauri = { version = "1.5", features = ["shell-open", "system-tray"] }
 
 # MCP client dependencies
 jsonrpc-core = "18.0"

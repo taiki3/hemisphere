@@ -1,12 +1,12 @@
 {
   "build": {
-    "beforeDevCommand": "",
-    "beforeBuildCommand": "",
-    "devPath": "../src",
-    "distDir": "../src"
+    "beforeDevCommand": "npm run dev",
+    "beforeBuildCommand": "npm run build",
+    "devPath": "http://localhost:1420",
+    "distDir": "../dist"
   },
   "package": {
-    "productName": "hemisphere-agent",
+    "productName": "Hemisphere Agent",
     "version": "0.1.0"
   },
   "tauri": {
@@ -15,6 +15,10 @@
       "shell": {
         "all": false,
         "open": true
+      },
+      "window": {
+        "all": false,
+        "setAlwaysOnTop": true
       }
     },
     "bundle": {
@@ -23,16 +27,27 @@
       "identifier": "com.hemisphere.agent",
       "icon": []
     },
+    "systemTray": {
+      "iconPath": "icons/icon.png",
+      "iconAsTemplate": true
+    },
     "security": {
       "csp": null
     },
     "windows": [
       {
         "fullscreen": false,
-        "resizable": true,
+        "resizable": false,
         "title": "Hemisphere Agent",
-        "width": 800,
-        "height": 600
+        "width": 350,
+        "height": 400,
+        "transparent": true,
+        "decorations": false,
+        "alwaysOnTop": true,
+        "skipTaskbar": true,
+        "center": false,
+        "x": 100,
+        "y": 100
       }
     ]
   }

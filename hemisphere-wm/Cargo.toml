@@ -5,6 +5,14 @@ authors.workspace = true
 edition.workspace = true
 license.workspace = true
 
+[lib]
+name = "hemisphere_wm"
+path = "src/lib.rs"
+
+[[bin]]
+name = "hemisphere-wm"
+path = "src/main.rs"
+
 [dependencies]
 serde.workspace = true
 serde_json.workspace = true

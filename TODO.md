@@ -2,18 +2,32 @@
 
 ## Phase 0: プロジェクト基盤構築 (〜2025/07/15)
 
-### セットアップタスク
-- [ ] モノレポ構造の初期化（Cargo Workspace設定）
-- [ ] 基本的なディレクトリ構造の作成
-- [ ] CI/CD環境の構築（GitHub Actions）
-- [ ] 開発環境のドキュメント化（CONTRIBUTING.md）
-- [ ] Rustプロジェクトの基本設定（rustfmt, clippy）
+### セットアップタスク ✅ 完了
+- [x] モノレポ構造の初期化（Cargo Workspace設定）
+- [x] 基本的なディレクトリ構造の作成
+- [x] CI/CD環境の構築（GitHub Actions）
+- [x] 開発環境のドキュメント化（CONTRIBUTING.md）
+- [x] Rustプロジェクトの基本設定（rustfmt, clippy）
+- [x] TDD環境の整備（cargo test, tarpaulin）
+- [x] プラットフォーム抽象化レイヤーの設計
+- [x] Zennブログ連携（サブモジュール）
 
 ### 技術検証タスク
-- [ ] Tauriの基本動作確認（Hello World）
+- [x] Tauriの基本動作確認（伺か風デスクトップマスコット実装）
 - [ ] ウィンドウ操作API調査（Linux/Windows）
 - [ ] MCP通信方式の技術選定（IPC vs Socket）
 - [ ] LLM API統合方法の調査
+
+### 本日の進捗（2025/07/09）
+- [x] hemisphere-agent UIを伺か風デスクトップマスコットに変更
+- [x] 吹き出しスタイルの会話UI実装
+- [x] React + Vite + TypeScriptでのUI構築
+- [x] 透明ウィンドウ設定（Tauri用）
+
+### 次のステップ
+- [ ] Windows環境でのTauriデスクトップアプリ実行
+- [ ] システムトレイ統合
+- [ ] ドラッグ移動機能の実装
 
 ## Phase 1: hemisphere-wm 基礎実装 (2025/07/16〜2025/08/15)
 

@@ -1,0 +1,3 @@
+[submodule "blog"]
+	path = blog
+	url = git@github.com:taiki3/zenn_blog.git
