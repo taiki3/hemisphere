@@ -14,7 +14,7 @@ pub fn create_tray_icon<R: Runtime>(app: &AppHandle<R>) -> Result<(), Box<dyn st
         .build()?;
     
     // トレイアイコンの作成
-    let _tray = TrayIconBuilder::with_id("main")
+    let _tray = TrayIconBuilder::with_id("hemisphere-tray")
         .tooltip("Hemisphere Agent")
         .menu(&menu)
         .on_menu_event(move |app, event| match event.id.as_ref() {

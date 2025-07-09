@@ -11,6 +11,7 @@ yarn-error.log*
 
 # Tauri
 /hemisphere-agent/src-tauri/target/
+/hemisphere-agent/target/
 /hemisphere-agent/dist/
 
 # IDE
