@@ -1,5 +1,5 @@
 use tauri::{AppHandle, Runtime, Manager};
-use tauri::tray::{TrayIconBuilder, MouseButton, MouseButtonState, TrayIconEvent};
+use tauri::tray::{TrayIcon, MouseButton, MouseButtonState, TrayIconEvent};
 use tauri::menu::{MenuBuilder, MenuItemBuilder};
 
 pub fn create_tray_icon<R: Runtime>(app: &AppHandle<R>) -> Result<(), Box<dyn std::error::Error>> {
@@ -13,11 +13,13 @@ pub fn create_tray_icon<R: Runtime>(app: &AppHandle<R>) -> Result<(), Box<dyn st
         .items(&[&show_i, &hide_i, &quit_i])
         .build()?;
     
-    // トレイアイコンの作成
-    let _tray = TrayIconBuilder::with_id("hemisphere-tray")
-        .tooltip("Hemisphere Agent")
-        .menu(&menu)
-        .on_menu_event(move |app, event| match event.id.as_ref() {
+    // 既存のトレイアイコンを取得（設定ファイルで作成されたもの）
+    if let Some(tray) = app.tray_icon_by_id("main") {
+        tray.set_menu(Some(menu))?;
+        tray.set_tooltip(Some("Hemisphere Agent"))?;
+        
+        // イベントハンドラを設定
+        tray.on_menu_event(move |app, event| match event.id.as_ref() {
             "quit" => {
                 app.exit(0);
             }
@@ -33,8 +35,9 @@ pub fn create_tray_icon<R: Runtime>(app: &AppHandle<R>) -> Result<(), Box<dyn st
                 }
             }
             _ => {}
-        })
-        .on_tray_icon_event(|tray, event| {
+        });
+        
+        tray.on_tray_icon_event(|tray, event| {
             if let TrayIconEvent::Click {
                 button: MouseButton::Left,
                 button_state: MouseButtonState::Up,
@@ -52,8 +55,8 @@ pub fn create_tray_icon<R: Runtime>(app: &AppHandle<R>) -> Result<(), Box<dyn st
                     }
                 }
             }
-        })
-        .build(app)?;
+        });
+    }
     
     Ok(())
 }
