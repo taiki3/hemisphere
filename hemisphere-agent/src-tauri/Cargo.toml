@@ -5,6 +5,9 @@ authors = ["Hemisphere Contributors"]
 edition = "2021"
 license = "MIT OR Apache-2.0"
 
+# このプロジェクトを親ワークスペースから独立させる
+[workspace]
+
 [build-dependencies]
 tauri-build = { version = "1.5", features = [] }
 
