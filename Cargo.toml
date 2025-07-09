@@ -1,7 +1,9 @@
 [workspace]
 members = [
     "hemisphere-wm",
-    # "hemisphere-agent/src-tauri", # 一時的にコメントアウト
+]
+exclude = [
+    "hemisphere-agent",
 ]
 resolver = "2"
 
