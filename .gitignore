@@ -13,6 +13,7 @@ yarn-error.log*
 /hemisphere-agent/src-tauri/target/
 /hemisphere-agent/target/
 /hemisphere-agent/dist/
+/hemisphere-agent/coverage/
 
 # IDE
 .vscode/

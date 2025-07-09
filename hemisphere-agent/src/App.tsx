@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Character } from './components/Character';
 import { SpeechBubble } from './components/SpeechBubble';
 import { ContextMenu } from './components/ContextMenu';
