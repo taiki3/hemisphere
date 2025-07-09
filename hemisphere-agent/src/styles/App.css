@@ -1,13 +1,16 @@
 /* 伺か風デスクトップマスコットスタイル */
 .app.ukagaka-style {
-  width: 100vw;
-  height: 100vh;
+  width: 350px;
+  height: 400px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: transparent;
   font-family: 'MS UI Gothic', 'Hiragino Kaku Gothic ProN', sans-serif;
   user-select: none;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 /* キャラクターコンテナ */

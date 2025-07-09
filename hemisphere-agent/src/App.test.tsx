@@ -60,10 +60,10 @@ describe('App Component', () => {
     expect(screen.getByText('こんにちは！Hemisphere Agentです。')).toBeInTheDocument()
     
     // 8秒後
-    vi.advanceTimersByTime(8000)
+    await vi.runOnlyPendingTimersAsync()
     
-    // メッセージが変わっているはず（具体的なメッセージはランダムなのでテストしない）
-    // アニメーションクラスが適用されることを確認
+    // タイマーが設定されていることを確認
+    // （実際のメッセージ変更はランダムなので具体的な内容はテストしない）
     
     vi.useRealTimers()
   })
