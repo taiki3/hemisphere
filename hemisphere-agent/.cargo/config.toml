@@ -4,3 +4,17 @@ target-dir = "target"
 
 [target.x86_64-pc-windows-msvc]
 rustflags = ["-C", "target-feature=+crt-static"]
+
+[net]
+# TLSインスペクション環境での対応
+git-fetch-with-cli = true
+
+# [http]
+# # プロキシサーバーがある場合はコメントを外して設定
+# proxy = "http://your-proxy:8080"
+# # 企業のルート証明書のパス（Windowsの場合）
+# cainfo = "C:/path/to/company-ca-bundle.crt"
+
+# [https]
+# proxy = "http://your-proxy:8080"
+# cainfo = "C:/path/to/company-ca-bundle.crt"
