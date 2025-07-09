@@ -1,54 +1,43 @@
 {
+  "productName": "Hemisphere Agent",
+  "version": "0.1.0",
+  "identifier": "com.hemisphere.agent",
   "build": {
     "beforeDevCommand": "npm run dev",
+    "devUrl": "http://localhost:1420",
     "beforeBuildCommand": "npm run build",
-    "devPath": "http://localhost:1420",
-    "distDir": "../dist"
+    "frontendDist": "../dist"
   },
-  "package": {
-    "productName": "Hemisphere Agent",
-    "version": "0.1.0"
-  },
-  "tauri": {
-    "allowlist": {
-      "all": false,
-      "shell": {
-        "all": false,
-        "open": true
-      },
-      "window": {
-        "all": false,
-        "setAlwaysOnTop": true
-      }
-    },
-    "bundle": {
-      "active": true,
-      "targets": "all",
-      "identifier": "com.hemisphere.agent",
-      "icon": []
-    },
-    "systemTray": {
-      "iconPath": "icons/icon.png",
-      "iconAsTemplate": true
-    },
-    "security": {
-      "csp": null
-    },
+  "app": {
     "windows": [
       {
-        "fullscreen": false,
-        "resizable": false,
         "title": "Hemisphere Agent",
         "width": 350,
         "height": 400,
-        "transparent": true,
-        "decorations": false,
+        "resizable": false,
+        "fullscreen": false,
         "alwaysOnTop": true,
+        "decorations": false,
+        "transparent": true,
         "skipTaskbar": true,
         "center": false,
         "x": 100,
         "y": 100
       }
+    ],
+    "security": {
+      "csp": null
+    },
+    "trayIcon": {
+      "iconPath": "icons/icon.png",
+      "iconAsTemplate": true
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/icon.png"
     ]
   }
 }
