@@ -42,7 +42,13 @@ fn main() -> Result<()> {
                 .build()?;
             
             // システムトレイアイコンの作成
+            // アイコンファイルを読み込む
+            let icon_bytes = include_bytes!("../icons/icon.png");
+            let icon = tauri::image::Image::from_bytes(icon_bytes)?;
+            
             let _tray = TrayIconBuilder::new()
+                .icon(icon)
+                .tooltip("Hemisphere Agent")
                 .menu(&menu)
                 .on_menu_event(move |app, event| match event.id.as_ref() {
                     "quit" => {
