@@ -1,5 +1,5 @@
 use tauri::{AppHandle, Runtime, Manager};
-use tauri::tray::{TrayIcon, MouseButton, MouseButtonState, TrayIconEvent};
+use tauri::tray::{MouseButton, MouseButtonState, TrayIconEvent};
 use tauri::menu::{MenuBuilder, MenuItemBuilder};
 
 pub fn create_tray_icon<R: Runtime>(app: &AppHandle<R>) -> Result<(), Box<dyn std::error::Error>> {
@@ -14,7 +14,7 @@ pub fn create_tray_icon<R: Runtime>(app: &AppHandle<R>) -> Result<(), Box<dyn st
         .build()?;
     
     // 既存のトレイアイコンを取得（設定ファイルで作成されたもの）
-    if let Some(tray) = app.tray_icon_by_id("main") {
+    if let Some(tray) = app.tray_by_id("main") {
         tray.set_menu(Some(menu))?;
         tray.set_tooltip(Some("Hemisphere Agent"))?;
         
