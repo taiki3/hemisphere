@@ -42,7 +42,9 @@ fn main() -> Result<()> {
                 .build()?;
             
             // システムトレイアイコンの作成
+            let icon = tauri::image::Image::from_path("icons/icon.png")?;
             let _tray = TrayIconBuilder::new()
+                .icon(icon)
                 .menu(&menu)
                 .on_menu_event(move |app, event| match event.id.as_ref() {
                     "quit" => {
