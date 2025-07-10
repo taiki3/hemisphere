@@ -1,7 +1,7 @@
 /* 伺か風デスクトップマスコットスタイル */
 .app.ukagaka-style {
-  width: 350px;
-  height: 400px;
+  width: 200px;
+  height: 300px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -11,13 +11,15 @@
   position: absolute;
   top: 0;
   left: 0;
+  /* ドラッグを無効化 */
+  -webkit-app-region: no-drag;
 }
 
 /* キャラクターコンテナ */
 .character-container {
   position: relative;
-  width: 200px;
-  height: 300px;
+  width: 180px;
+  height: 280px;
 }
 
 /* キャラクター画像 */
@@ -32,6 +34,8 @@
   filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
   transition: transform 0.3s ease;
   z-index: 10;
+  /* この要素だけドラッグ可能 */
+  -webkit-app-region: drag;
 }
 
 .character:hover {
@@ -60,6 +64,8 @@
   color: #333;
   opacity: 1;
   transition: all 0.3s ease;
+  /* ドラッグ無効化 */
+  -webkit-app-region: no-drag;
 }
 
 .speech-bubble::before {
