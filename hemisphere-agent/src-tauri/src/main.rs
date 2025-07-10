@@ -1,12 +1,18 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-mod lib;
 mod tray_icon;
 
 use anyhow::Result;
+use tauri::Runtime;
 use tracing::info;
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
+
+// Tauriコマンド: ウィンドウをドラッグ開始
+#[tauri::command]
+fn start_dragging<R: Runtime>(window: tauri::Window<R>) {
+    window.start_dragging().ok();
+}
 
 fn main() -> Result<()> {
     // Initialize tracing
@@ -38,7 +44,7 @@ fn main() -> Result<()> {
             
             Ok(())
         })
-        .invoke_handler(tauri::generate_handler![lib::start_dragging])
+        .invoke_handler(tauri::generate_handler![start_dragging])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 
