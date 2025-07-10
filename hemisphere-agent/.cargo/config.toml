@@ -18,3 +18,6 @@ git-fetch-with-cli = true
 # [https]
 # proxy = "http://your-proxy:8080"
 # cainfo = "C:/path/to/company-ca-bundle.crt"
+
+[target.x86_64-pc-windows-gnu]
+linker = "x86_64-w64-mingw32-gcc"

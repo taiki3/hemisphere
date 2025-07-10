@@ -4,7 +4,7 @@
 mod tray_icon;
 
 use anyhow::Result;
-use tauri::Runtime;
+use tauri::{Manager, Runtime};
 use tracing::info;
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
