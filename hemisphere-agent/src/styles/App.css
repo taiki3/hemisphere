@@ -1,9 +1,9 @@
 /* 伺か風デスクトップマスコットスタイル */
 .app.ukagaka-style {
-  width: 200px;
-  height: 300px;
+  width: 300px;
+  height: 1024px;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   background: transparent;
   font-family: 'MS UI Gothic', 'Hiragino Kaku Gothic ProN', sans-serif;
@@ -18,11 +18,13 @@
 /* キャラクターコンテナ */
 .character-container {
   position: relative;
-  width: 180px;
-  height: 280px;
+  width: 280px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 20px;
 }
 
 /* キャラクター画像 */
@@ -52,15 +54,17 @@
 /* チャット履歴 */
 .chat-history {
   position: absolute;
-  bottom: 120px;
+  bottom: 150px;
   left: 50%;
   transform: translateX(-50%);
-  width: 180px;
-  max-height: 150px;
+  width: 260px;
+  height: 800px;
+  max-height: 800px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 8px;
+  padding: 10px;
   scrollbar-width: thin;
   scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
 }
@@ -83,11 +87,11 @@
   background: white;
   border: 2px solid #333;
   border-radius: 12px;
-  padding: 8px 12px;
-  max-width: 160px;
+  padding: 10px 14px;
+  max-width: 200px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  font-size: 12px;
-  line-height: 1.4;
+  font-size: 13px;
+  line-height: 1.5;
   color: #333;
   opacity: 1;
   transition: all 0.3s ease;
@@ -95,6 +99,7 @@
   -webkit-app-region: no-drag;
   position: relative;
   margin: 0 auto;
+  word-wrap: break-word;
 }
 
 /* AIの吹き出し */
@@ -202,7 +207,7 @@
 /* コンテキストメニュー */
 .context-menu {
   position: absolute;
-  bottom: 50px;
+  bottom: 100px;
   right: -150px;
   background: white;
   border: 1px solid #ccc;
@@ -246,20 +251,20 @@
 /* テキスト入力 */
 .text-input-container {
   position: absolute;
-  bottom: 5px;
+  bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
-  width: 160px;
+  width: 240px;
   z-index: 20;
 }
 
 .text-input {
   width: 100%;
-  padding: 6px 10px;
+  padding: 8px 12px;
   border: 2px solid #333;
   border-radius: 12px;
   background: white;
-  font-size: 12px;
+  font-size: 13px;
   font-family: 'MS UI Gothic', 'Hiragino Kaku Gothic ProN', sans-serif;
   outline: none;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
