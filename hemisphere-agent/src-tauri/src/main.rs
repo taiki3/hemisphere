@@ -2,6 +2,7 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 mod tray_icon;
+mod llm;
 
 use anyhow::Result;
 use tauri::{Manager, Runtime};
@@ -12,6 +13,14 @@ use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 #[tauri::command]
 fn start_dragging<R: Runtime>(window: tauri::Window<R>) {
     window.start_dragging().ok();
+}
+
+// Tauriコマンド: LLMに問い合わせ
+#[tauri::command]
+async fn ask_llm(prompt: String) -> Result<String, String> {
+    llm::ask_llm(prompt)
+        .await
+        .map_err(|e| e.to_string())
 }
 
 fn main() -> Result<()> {
@@ -44,7 +53,7 @@ fn main() -> Result<()> {
             
             Ok(())
         })
-        .invoke_handler(tauri::generate_handler![start_dragging])
+        .invoke_handler(tauri::generate_handler![start_dragging, ask_llm])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 

@@ -18,22 +18,40 @@ const ROTATION_INTERVAL = 8000;
 const ANIMATION_DURATION = 300;
 
 export function useMessageRotation(initialMessage: Message) {
-  const [message, setMessage] = useState<Message>(initialMessage);
+  const [message, setMessageState] = useState<Message>(initialMessage);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [isUserInteracting, setIsUserInteracting] = useState(false);
 
   useEffect(() => {
+    if (isUserInteracting) return;
+
     const interval = setInterval(() => {
       setIsAnimating(true);
       
       setTimeout(() => {
         const randomMessage = MESSAGES[Math.floor(Math.random() * MESSAGES.length)];
-        setMessage(randomMessage);
+        setMessageState(randomMessage);
         setIsAnimating(false);
       }, ANIMATION_DURATION);
     }, ROTATION_INTERVAL);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [isUserInteracting]);
 
-  return { message, isAnimating };
+  const setMessage = (newMessage: Message) => {
+    setIsUserInteracting(true);
+    setIsAnimating(true);
+    
+    setTimeout(() => {
+      setMessageState(newMessage);
+      setIsAnimating(false);
+      
+      // 10秒後に自動ローテーションを再開
+      setTimeout(() => {
+        setIsUserInteracting(false);
+      }, 10000);
+    }, ANIMATION_DURATION);
+  };
+
+  return { message, isAnimating, setMessage };
 }
