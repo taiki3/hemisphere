@@ -11,24 +11,12 @@ export const ChatHistory: React.FC<ChatHistoryProps> = ({ messages, isThinking }
 
   useEffect(() => {
     if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+      scrollRef.current.scrollTop = 0;
     }
   }, [messages, isThinking]);
 
   return (
     <div className="chat-history" ref={scrollRef}>
-      {messages.map((message) => (
-        <div 
-          key={message.id} 
-          className={`speech-bubble ${message.sender === 'user' ? 'user-bubble' : 'ai-bubble'}`}
-        >
-          <div className="speech-content">
-            {message.text.split('\n').map((line, i) => (
-              <p key={i}>{line}</p>
-            ))}
-          </div>
-        </div>
-      ))}
       {isThinking && (
         <div className="speech-bubble ai-bubble">
           <div className="speech-content">
@@ -40,6 +28,18 @@ export const ChatHistory: React.FC<ChatHistoryProps> = ({ messages, isThinking }
           </div>
         </div>
       )}
+      {[...messages].reverse().map((message) => (
+        <div 
+          key={message.id} 
+          className={`speech-bubble ${message.sender === 'user' ? 'user-bubble' : 'ai-bubble'}`}
+        >
+          <div className="speech-content">
+            {message.text.split('\n').map((line, i) => (
+              <p key={i}>{line}</p>
+            ))}
+          </div>
+        </div>
+      ))}
     </div>
   );
 };

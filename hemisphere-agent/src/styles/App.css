@@ -61,10 +61,12 @@
   height: 800px;
   max-height: 800px;
   overflow-y: auto;
+  overflow-x: hidden;
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   gap: 8px;
   padding: 10px;
+  padding-bottom: 0;
   scrollbar-width: thin;
   scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
 }
