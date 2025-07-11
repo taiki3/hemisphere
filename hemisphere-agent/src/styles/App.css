@@ -20,18 +20,21 @@
   position: relative;
   width: 180px;
   height: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* キャラクター画像 */
 .character {
-  width: 150px;
-  height: 150px;
+  width: 100px;
+  height: 100px;
   position: absolute;
-  bottom: 0;
+  bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
   cursor: pointer;
-  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+  filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3));
   transition: transform 0.3s ease;
   z-index: 10;
   /* この要素だけドラッグ可能 */
@@ -46,57 +49,114 @@
   transform: translateX(-50%) scale(0.95);
 }
 
-/* 吹き出し */
-.speech-bubble {
+/* チャット履歴 */
+.chat-history {
   position: absolute;
-  bottom: 160px;
+  bottom: 120px;
   left: 50%;
   transform: translateX(-50%);
+  width: 180px;
+  max-height: 150px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+
+.chat-history::-webkit-scrollbar {
+  width: 4px;
+}
+
+.chat-history::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.chat-history::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+}
+
+/* 吹き出し共通 */
+.speech-bubble {
   background: white;
   border: 2px solid #333;
-  border-radius: 16px;
-  padding: 12px 16px;
-  min-width: 200px;
-  max-width: 300px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  font-size: 14px;
-  line-height: 1.5;
+  border-radius: 12px;
+  padding: 8px 12px;
+  max-width: 160px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  font-size: 12px;
+  line-height: 1.4;
   color: #333;
   opacity: 1;
   transition: all 0.3s ease;
   /* ドラッグ無効化 */
   -webkit-app-region: no-drag;
+  position: relative;
+  margin: 0 auto;
 }
 
-.speech-bubble::before {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 0;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-top: 10px solid #333;
+/* AIの吹き出し */
+.ai-bubble {
+  align-self: flex-start;
+  margin-left: 10px;
 }
 
-.speech-bubble::after {
+.ai-bubble::before {
   content: '';
   position: absolute;
-  bottom: -7px;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: -8px;
+  left: 20px;
   width: 0;
   height: 0;
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
-  border-top: 8px solid white;
+  border-top: 8px solid #333;
 }
 
-.speech-bubble.animating {
-  opacity: 0;
-  transform: translateX(-50%) scale(0.8);
+.ai-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 20px;
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid white;
+}
+
+/* ユーザーの吹き出し */
+.user-bubble {
+  align-self: flex-end;
+  margin-right: 10px;
+  background: #e6f2ff;
+  border-color: #4a90e2;
+}
+
+.user-bubble::before {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  right: 20px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid #4a90e2;
+}
+
+.user-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  right: 20px;
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #e6f2ff;
 }
 
 .speech-content p {
@@ -186,23 +246,23 @@
 /* テキスト入力 */
 .text-input-container {
   position: absolute;
-  bottom: 40px;
+  bottom: 5px;
   left: 50%;
   transform: translateX(-50%);
-  width: 180px;
+  width: 160px;
   z-index: 20;
 }
 
 .text-input {
   width: 100%;
-  padding: 8px 12px;
+  padding: 6px 10px;
   border: 2px solid #333;
-  border-radius: 16px;
+  border-radius: 12px;
   background: white;
-  font-size: 13px;
+  font-size: 12px;
   font-family: 'MS UI Gothic', 'Hiragino Kaku Gothic ProN', sans-serif;
   outline: none;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: border-color 0.2s;
 }
 

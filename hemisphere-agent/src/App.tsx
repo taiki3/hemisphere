@@ -1,16 +1,21 @@
 import { useState } from 'react';
 import { Character } from './components/Character';
-import { SpeechBubble } from './components/SpeechBubble';
+import { ChatHistory } from './components/ChatHistory';
 import { ContextMenu } from './components/ContextMenu';
 import { TextInput } from './components/TextInput';
-import { useMessageRotation } from './hooks/useMessageRotation';
 import { invoke } from '@tauri-apps/api/core';
+import { Message } from './types/Message';
 import './styles/App.css';
 
-const INITIAL_MESSAGE = { text: "こんにちは！Hemisphere Agentです。" };
-
 function App() {
-  const { message, isAnimating, setMessage } = useMessageRotation(INITIAL_MESSAGE);
+  const [messages, setMessages] = useState<Message[]>([
+    {
+      id: '1',
+      text: 'こんにちは！Hemisphere Agentです。',
+      sender: 'ai',
+      timestamp: new Date()
+    }
+  ]);
   const [showMenu, setShowMenu] = useState(false);
   const [showInput, setShowInput] = useState(false);
   const [isThinking, setIsThinking] = useState(false);
@@ -40,20 +45,39 @@ function App() {
 
   const handleTextSubmit = async (text: string) => {
     setShowInput(false);
+    
+    // ユーザーメッセージを追加
+    const userMessage: Message = {
+      id: Date.now().toString(),
+      text,
+      sender: 'user',
+      timestamp: new Date()
+    };
+    setMessages(prev => [...prev, userMessage]);
+    
     setIsThinking(true);
     
     try {
-      // ユーザーの入力を表示
-      setMessage({ text });
-      
       // LLMに問い合わせ
       const response = await invoke<string>('ask_llm', { prompt: text });
       
-      // レスポンスを表示
-      setMessage({ text: response });
+      // AIメッセージを追加
+      const aiMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        text: response,
+        sender: 'ai',
+        timestamp: new Date()
+      };
+      setMessages(prev => [...prev, aiMessage]);
     } catch (error) {
       console.error('Failed to get LLM response:', error);
-      setMessage({ text: 'ごめんなさい、エラーが発生しました。' });
+      const errorMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        text: 'ごめんなさい、エラーが発生しました。',
+        sender: 'ai',
+        timestamp: new Date()
+      };
+      setMessages(prev => [...prev, errorMessage]);
     } finally {
       setIsThinking(false);
     }
@@ -66,12 +90,8 @@ function App() {
   return (
     <div className="app ukagaka-style">
       <div className="character-container">
+        <ChatHistory messages={messages} isThinking={isThinking} />
         <Character onClick={handleCharacterClick} />
-        <SpeechBubble 
-          message={message} 
-          isAnimating={isAnimating} 
-          isThinking={isThinking}
-        />
         {showMenu && <ContextMenu onAction={handleMenuAction} />}
         <TextInput 
           isVisible={showInput}
